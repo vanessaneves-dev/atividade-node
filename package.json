@@ -1,0 +1,16 @@
+{
+  "name": "atividade-node",
+  "version": "1.0.0",
+  "description": "Para realizar esta atividade crie um novo projeto em Node e Express e também um repositório no Github.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx nodemon ./index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
