@@ -29,3 +29,6 @@ Este projeto consiste em um sistema de gerenciamento de alunos usando Node.js e 
 ## Formato de entrega
 
 Repositório no Github.
+
+##Documentação API Postman
+https://documenter.getpostman.com/view/26815809/2s93XyUP1g
