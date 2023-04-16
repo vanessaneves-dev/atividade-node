@@ -59,6 +59,26 @@ app.post('/alunos/deletar/:index', (req, res) => {
   });
 });
 
+app.post('/alunos/atualizar/:index', (req, res) => {
+  const index = parseInt(req.params.index);
+  const { nome, media } = req.body;
+
+  if (isNaN(index) || index < 0 || index >= alunos.length) {
+    return res.status(404).json({ error: 'Aluno não encontrado' });
+  }
+
+  if (nome) {
+    alunos[index].nome = nome;
+  }
+  
+  if (media) {
+    alunos[index].media = media;
+  }
+
+  alunos[index].matricula = (index + 1).toString().padStart(3, '0');
+
+  return res.status(200).json(alunos[index]);
+});
 
 app.listen(3000, () => {
   console.log("Servidor rodando na porta http://localhost:3000/");
