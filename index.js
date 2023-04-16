@@ -1,8 +1,21 @@
 const express = require('express');
 const app = express();
+const fs = require('fs');
 const { alunos, filtrarPorNome, filtrarPorMedia } = require('./alunos.js');
 
 app.use(express.json());
+
+function salvarAlunos(alunos) {
+  const data = JSON.stringify(alunos, null, 2);
+  fs.writeFile('db.json', data, (err) => {
+    if (err) {
+      console.error('Erro ao salvar os dados dos alunos:', err);
+    } else {
+      console.log('Dados dos alunos salvos com sucesso em db.json');
+    }
+  });
+}
+
 
 app.get('/alunos', (req, res) => {
   const { nome, media } = req.query;
@@ -31,17 +44,17 @@ app.post('/alunos/novo', (req, res) =>  {
   ) {
     return res.status(400).json({ error: 'Campos inválidos' });
   }
-  // Verificar se a matrícula já existe
+ 
   const matriculaExistente = alunos.find((aluno) => aluno.matricula === matricula);
   if (matriculaExistente) {
     return res.status(400).json({ error: 'Matrícula já cadastrada' });
   }
 
-  // Adicionar o novo aluno
+ 
   const novoAluno = { nome, matricula, media };
   alunos.push(novoAluno);
 
-  // Retornar o aluno criado com status 201
+  salvarAlunos(alunos);  
   return res.status(201).json(novoAluno);
 });
 
@@ -53,6 +66,8 @@ app.post('/alunos/deletar/:index', (req, res) => {
   }
 
   const alunoRemovido = alunos.splice(index, 1)[0];
+
+  salvarAlunos(alunos);
   return res.status(200).json({
     message: 'Aluno removido com sucesso',
     aluno: alunoRemovido
@@ -75,8 +90,10 @@ app.post('/alunos/atualizar/:index', (req, res) => {
     alunos[index].media = media;
   }
 
+  // inclui uma atualização da matricula com base no index da atualização acima
   alunos[index].matricula = (index + 1).toString().padStart(3, '0');
 
+  salvarAlunos(alunos);
   return res.status(200).json(alunos[index]);
 });
 
