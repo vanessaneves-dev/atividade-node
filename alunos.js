@@ -55,7 +55,7 @@ router.post('/novo', (req, res) =>  {
   return res.status(201).json(novoAluno);
 });
 
-router.post('/deletar/:index', (req, res) => {
+router.delete('/:index', (req, res) => {
   const index = parseInt(req.params.index);
 
   if (isNaN(index) || index < 0 || index >= alunos.length) {
@@ -71,7 +71,7 @@ router.post('/deletar/:index', (req, res) => {
   });
 });
 
-router.post('/atualizar/:index', (req, res) => {
+router.put('/:index', (req, res) => {
 
   const index = parseInt(req.params.index);
   console.log(req.body)
