@@ -1,15 +1,18 @@
 const express = require('express');
+const morgan = require("morgan");
 const app = express();
 const {router, alunos} = require('./alunos.js');
 
 app.use(express.json());
+
+app.use(morgan('combined'));
 
 app.use("/alunos", router);
 
 router.use((req, res, next) => {
   console.log('Time: ', Date.now())
   next()
-})
+});
 function filtrarPorNome(nome) {
   return alunos.filter((aluno) => aluno.nome.includes(nome));
 
