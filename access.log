@@ -1,0 +1,3 @@
+::1 - - [17/Apr/2023:00:57:35 +0000] "GET / HTTP/1.1" 404 139 "-" "PostmanRuntime/7.32.2"
+::1 - - [17/Apr/2023:00:57:42 +0000] "GET /alunos HTTP/1.1" 200 543 "-" "PostmanRuntime/7.32.2"
+::1 - - [17/Apr/2023:00:59:31 +0000] "GET /alunos?media:8.5 HTTP/1.1" 200 543 "-" "PostmanRuntime/7.32.2"
